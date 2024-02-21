@@ -1,0 +1,19 @@
+#addMovieForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 400px;
+    /* height: 500px; */
+    gap: 15px;
+    box-shadow: 0 0 5px;
+    border-radius: 7px;
+    padding: 10px;
+    margin: 20px;
+}
+
+#addMovieForm .input {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-items: start;
+}
