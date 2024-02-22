@@ -17,3 +17,42 @@
     grid-template-columns: 1fr 2fr;
     justify-items: start;
 }
+
+#movieList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movie-card {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-template-rows: 40px 40px 1fr;
+
+    width: 300px;
+
+    box-shadow: 0 0 5px;
+    border-radius: 7px;
+    padding: 10px;
+    margin: 20px;
+}
+
+.movie-card p {
+    margin: 0;
+    padding: 0px 7px;
+    font-family: sans-serif;
+}
+
+.movie-rating {
+    justify-self: end;
+    margin: 0;
+}
+.movie-genres {
+    justify-self: end;
+    grid-column: span 2;
+    margin: 0;
+    font-size: 1rem;
+}
+.movie-description {
+    grid-column: span 2;
+    font-size: 1rem;
+}

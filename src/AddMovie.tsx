@@ -1,16 +1,33 @@
 import { useState } from "react";
+import Genre, { allGenres } from "./Genre";
+import { addMovie } from "./MovieList";
+
+export class Movie {
+    id: number;
+    title: string;
+    rating: number;
+    genres: Genre[];
+    description: string;
+
+    constructor(title: string, rating: number, genres: Genre[], description: string) {
+        this.id = ++Movie.idCount;
+        this.title = title;
+        this.rating = rating;
+        this.genres = genres;
+        this.description = description;
+    }
+
+    private static idCount = 0;
+}
 
 export default function AddMovie() {
     const [title, setTitle] = useState("");
     const [rating, setRating] = useState(1);
     const [description, setDescription] = useState("");
-
-    const [genres, setGenres] = useState([false, false, false]);
-    const allGenres: string[] = ["horror", "romcom", "scifi"];
-    const genreNames: string[] = ["Horror", "Romantic Comedy", "Science Fiction"];
+    const [genres, setGenres] = useState(allGenres.map(() => false));
     const selectedGenres: string[] = [];
     genres.forEach((gSel, ix) => {
-        if (gSel) selectedGenres.push(allGenres[ix]);
+        if (gSel) selectedGenres.push(allGenres[ix].id);
     });
 
     console.log("AddMove renderer:", title, rating, genres, description);
@@ -18,6 +35,11 @@ export default function AddMovie() {
     const onSubmit: React.FormEventHandler<HTMLFormElement> = e => {
         console.log("Submit:", document.getElementById("titleIn")?.value, title);
         e.preventDefault();
+
+        const selGens = selectedGenres.map(sg => allGenres.find(g => g.id === sg) ?? new Genre("error", "Error"));
+        const movie = new Movie(title, rating, selGens, description);
+
+        addMovie(movie);
     };
 
     const onGenreChange: React.ChangeEventHandler<HTMLSelectElement> = e => {
@@ -59,9 +81,9 @@ export default function AddMovie() {
             <div className="input">
                 <label htmlFor="genre">Genre</label>
                 <select name="genre" id="genreIn" multiple value={selectedGenres} onChange={onGenreChange}>
-                    {allGenres.map((g, ix) => (
-                        <option key={g} value={g}>
-                            {genreNames[ix]}
+                    {allGenres.map(g => (
+                        <option key={g.id} value={g.id}>
+                            {g.name}
                         </option>
                     ))}
                 </select>
