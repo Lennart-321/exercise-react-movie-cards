@@ -10,19 +10,23 @@ export function addMovie0(movie: Movie) {
     moviesRenewed.push(movie);
     setMoviesGlb(moviesRenewed);
 }
-export let addMovie = (m: Movie) => {};
+//export let addMovie = (m: Movie) => { };
+export const addMovie = function (movie: Movie) {
+    console.log("addMovie:", movie.title);
+    setMoviesGlb([...currentMovies, movie]);
+};
 
 export default function MovieList() {
     const [movies, setMovies]: [movies: Movie[], setMovies: any] = useState([]);
     currentMovies = movies;
     setMoviesGlb = setMovies;
 
-    addMovie = function (movie: Movie) {
-        console.log("addMovie:", movie.title);
-        const moviesRenewed = currentMovies.slice(0);
-        moviesRenewed.push(movie);
-        setMoviesGlb(moviesRenewed);
-    };
+    // addMovie = function (movie: Movie) {
+    //     console.log("addMovie:", movie.title);
+    //     const moviesRenewed = currentMovies.slice(0);
+    //     moviesRenewed.push(movie);
+    //     setMoviesGlb(moviesRenewed);
+    // };
 
     function removeCard(movie: Movie) {
         let index = movies.indexOf(movie);

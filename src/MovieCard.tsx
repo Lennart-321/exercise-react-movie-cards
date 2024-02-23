@@ -1,4 +1,5 @@
 import { Movie } from "./AddMovie";
+import { maxRating } from "./AddMovie";
 
 export default function MovieCard({ movie, remover }: { movie: Movie; remover: (m: Movie) => void }) {
     return (
@@ -6,7 +7,9 @@ export default function MovieCard({ movie, remover }: { movie: Movie; remover: (
             <p className="movie-title">
                 {movie.title} ({movie.id})
             </p>
-            <p className="movie-rating">{movie.rating}</p>
+            <p className="movie-rating">
+                {movie.rating}/{maxRating}
+            </p>
             <p className="movie-genres">
                 {movie.genres.reduce((res, gen) => res + (res.length ? " " : "") + gen.name, "")}
             </p>

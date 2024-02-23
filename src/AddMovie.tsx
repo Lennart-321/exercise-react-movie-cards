@@ -2,6 +2,7 @@ import { useState } from "react";
 import Genre, { allGenres } from "./Genre";
 import { addMovie } from "./MovieList";
 
+export const maxRating = 5;
 export class Movie {
     id: number;
     title: string;
@@ -76,6 +77,8 @@ export default function AddMovie() {
                     id="ratingIn"
                     onChange={e => setRating(Number(e.target.value))}
                     value={rating}
+                    min="1"
+                    max={maxRating}
                 />
             </div>
             <div className="input">
